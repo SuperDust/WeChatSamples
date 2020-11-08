@@ -106,23 +106,16 @@ namespace WeChatSamples.Controllers
                 nonceStr,
                 timestamp,
                 _currentpageurl);
-            string appsignature = string.Format("jsapi_ticket={0}&noncestr={1}&timestamp={2}&url={3}",
-              await GetAppJssdkTicket(),
-                nonceStr,
-                timestamp,
-                _currentpageurl);
+
             qysignature = GetSignature(qysignature);
-            appsignature = GetSignature(appsignature);
             var parmas = new
             {
                 corpid = _corpId, // 必填，企业微信的corpid，必须与当前登录的企业一致
                 agentid = _agentId, // 必填，企业微信的应用id （e.g. 1000247）
                 timestamp = timestamp, // 必填，生成签名的时间戳
                 noncestr = nonceStr, // 必填，生成签名的随机串
-                signature = qysignature,
-                appsignature = appsignature
+                signature = qysignature
             };
-
             return Ok(parmas);
         }
 
